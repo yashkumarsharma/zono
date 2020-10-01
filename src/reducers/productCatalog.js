@@ -27,3 +27,7 @@ export function isProductCatalogLoading({ productCatalog }) {
 export function getAllProducts({ productCatalog }) {
   return productCatalog.get('products')
 }
+
+export function getProductsById({ productCatalog }, productIds) {
+  return productCatalog.get('products').filter(product => productIds.includes(product.id))
+}

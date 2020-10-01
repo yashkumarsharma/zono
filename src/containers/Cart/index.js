@@ -2,19 +2,25 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { getCart } from '../../reducers/cart'
+import { getProductsById } from '../../reducers/productCatalog'
+import { Cart } from '../../components'
 
 const Container = props => {
+  const { cart, products } = props
 
-  console.log('props.....', props)
   return (
-    <div> Empty Cart </div>
+    <Cart
+      cart={cart}
+      products={products}
+    />
   )
 }
 
-// getCart
 const mapStateToProps = (state, ownProps) => {
+  const cart = getCart(state).toJS()
   return {
-    cart : getCart(state).toJS(),
+    cart,
+    products: getProductsById(state, Object.keys(cart)).toJS(),
   }
 }
 
