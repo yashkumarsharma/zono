@@ -2,5 +2,7 @@ import React from 'react'
 
 export default () => {
 
-  return 'Cart Page'
+  return (
+    <div> Empty Cart </div>
+  )
 }

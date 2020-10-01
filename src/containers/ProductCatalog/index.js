@@ -1,33 +1,17 @@
 import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
 
-import {
-  getProducts,
-} from '../../api'
+import { getProductCatalog } from '../../actions'
+import { ProductCatalog } from '../../components'
+import { getAllProducts, isProductCatalogLoading } from '../../reducers/productCatalog'
 
-import {
-  ProductCatalog,
-} from '../../components'
-
-export default () => {
-  const [productList, setProductList] = useState([])
+const Container = (props) => {
   const [cartItems, setCartItems] = useState({})
-  const [loading, setLoading] = useState(true)
-  // fetch data, ideally an action is dispatched and redux saga calls the api and set it in reducer
-  // To save time, I am calling the api here.
+  const { getProductCatalog, isLoading, productList } = props
+
   useEffect(() => {
-    async function fetchData() {
-      // You can await here
-      const { data, code } = await getProducts()
-      if(code === 200) {
-        setProductList(data)
-      }
-      else {
-        // error handling
-      }
-      setLoading(false)
-    }
-    fetchData()
-  }, [loading]) // Not accurate, but will work for now. // Todo: Check this
+    if(isLoading) getProductCatalog()
+  }, [getProductCatalog, isLoading])
 
   const updateQuantity = (id, quantity) => {
     if(quantity < 0) return
@@ -43,8 +27,7 @@ export default () => {
     setCartItems(updatedCart) // Order will not be maintained :/
   }
 
-  console.log('cartItems test...', cartItems)
-  if(loading) return 'Products are being loaded...'
+  if(isLoading) return 'Products are being loaded...'
 
   return (
     <ProductCatalog
@@ -54,3 +37,13 @@ export default () => {
     />
   )
 }
+
+const mapStateToProps = (state, ownProps) => {
+  console.log('What is state', state)
+  return {
+    productList: getAllProducts(state).toJS() ,
+    isLoading: isProductCatalogLoading(state),
+  }
+}
+
+export default connect(mapStateToProps, { getProductCatalog })(Container)
