@@ -8,6 +8,7 @@ export const initialState = Map({
 
 export default {
   cart: createReducer(initialState, {
+    [ActionTypes.CHECKOUT_SUCCESS]: () => initialState,
     [ActionTypes.UPDATE_CART]: (state, action) => {
       const { id, quantity } = action.payload
 

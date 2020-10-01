@@ -1,2 +1,3 @@
-export * from './productCatalog'
 export * from './cart'
+export * from './checkout'
+export * from './productCatalog'

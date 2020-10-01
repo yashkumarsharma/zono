@@ -11,7 +11,6 @@ export default {
   productCatalog: createReducer(initialState, {
     [ActionTypes.SET_PRODUCTS]: (state, action) => {
       const { data } = action.payload
-      console.log('Reached reducer', data)
       return state.withMutations(stateMap => {
         stateMap.set('products', List(data))
         stateMap.set('isLoading', false)

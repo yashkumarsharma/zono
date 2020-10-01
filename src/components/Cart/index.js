@@ -1,6 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import { SingleProduct } from '../'
+import './style.css'
 
 export default (props) => {
   const { cart, products } = props
@@ -24,6 +26,17 @@ export default (props) => {
     )
   }
 
+  const renderCheckOutButton = () => (
+    <div className='checkoutButton'>
+      <Link to='/checkout'> Checkout </Link>
+    </div>
+  )
+
   if(!products.length) return 'Nothing is present in the cart...'
-  return renderProducts()
+  return (
+    <>
+      {renderProducts()}
+      {renderCheckOutButton()}
+    </>
+  )
 }

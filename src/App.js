@@ -26,7 +26,11 @@ const configureStore = (() => {
   return {
     create() {
       if (!store) {
-        store = createStore(combineReducers(reducer), compose(applyMiddleware(sagaMiddleware)))
+        store = createStore(
+          combineReducers(reducer),
+          compose(applyMiddleware(sagaMiddleware),
+          window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+        ))
       }
       return store
     },

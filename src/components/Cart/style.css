@@ -1,0 +1,17 @@
+.checkoutButton {
+  position: fixed;
+  top: 25vh;
+  right: 2vh;
+  border: 1px solid #282c34;
+  padding: 2vh;
+  background-color: #282c34;
+  color: #fff;
+  cursor: pointer;
+}
+
+.checkoutButton > a {
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
