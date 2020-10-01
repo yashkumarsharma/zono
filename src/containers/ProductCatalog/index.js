@@ -1,49 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
-import { getProductCatalog } from '../../actions'
+import { getProductCatalog, updateCart } from '../../actions'
 import { ProductCatalog } from '../../components'
 import { getAllProducts, isProductCatalogLoading } from '../../reducers/productCatalog'
+import { getCart } from '../../reducers/cart'
 
 const Container = (props) => {
-  const [cartItems, setCartItems] = useState({})
-  const { getProductCatalog, isLoading, productList } = props
+  const { cart, getProductCatalog, isLoading, productList, updateCart } = props
 
   useEffect(() => {
     if(isLoading) getProductCatalog()
   }, [getProductCatalog, isLoading])
 
-  const updateQuantity = (id, quantity) => {
-    if(quantity < 0) return
-    const tempCart = {...cartItems}
-    if(!!tempCart[id]) { delete tempCart[id] }
-
-    let currentItem = {}
-    if(quantity > 0) {
-      currentItem = { [id]: quantity }
-    } 
-
-    const updatedCart = { ...tempCart, ...currentItem }
-    setCartItems(updatedCart) // Order will not be maintained :/
-  }
 
   if(isLoading) return 'Products are being loaded...'
-
   return (
     <ProductCatalog
       productList={productList}
-      updateQuantity={updateQuantity}
-      cartItems={cartItems} // this looks like an overhead, rivist// Todo
+      updateCart={updateCart}
+      cart={cart} // Scope of refactoring
     />
   )
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log('What is state', state)
   return {
-    productList: getAllProducts(state).toJS() ,
+    productList: getAllProducts(state).toJS(),
     isLoading: isProductCatalogLoading(state),
+    cart : getCart(state).toJS()
   }
 }
 
-export default connect(mapStateToProps, { getProductCatalog })(Container)
+export default connect(mapStateToProps, { getProductCatalog, updateCart })(Container)

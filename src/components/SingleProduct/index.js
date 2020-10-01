@@ -3,23 +3,19 @@ import React from 'react'
 import './style.css'
 
 export default (props) => {
-
+  const { icon, id, name, price, quantity, updateCart } = props
 
   const renderQuantity = () => {
-    const { id, quantity, updateQuantity } = props
-    // Todo: Add check if quantity is already 0
+    const isMinusButtonDisabled = quantity === 0
     return (
       <div>
-        <input value={quantity} />
-        <button onClick={() => updateQuantity(id, quantity + 1)}> + </button>
-        <button onClick={() => updateQuantity(id, quantity - 1)}> - </button>
+        <input disabled value={quantity} />
+        <button onClick={() => updateCart({ id, quantity: quantity + 1})}> + </button>
+        <button onClick={() => updateCart({ id, quantity: quantity - 1})} disabled={isMinusButtonDisabled}> - </button>
       </div>
     )
   }
 
-  // separate component for Quantity can be made...
-  console.log('Props of Single Product', props)
-  const { icon, name, price } = props
   return (
     <div className='productWrapper'>
       <div> <img alt={name} className='productIcon' src={icon} /> </div>
