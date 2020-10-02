@@ -1,9 +1,16 @@
 import { Map, List } from 'immutable'
 import { ActionTypes } from '../constants/index'
-import { createReducer } from '../utilities/helper'
+import { createReducer, getInitialState } from '../utilities/helper'
+
+const storedState = getInitialState('productCatalog')
+let products = List([])
+
+if(storedState) {
+  products = List(storedState.products)
+}
 
 export const initialState = Map({
-  products: List([]),
+  products: products,
   isLoading: true,
 })
 

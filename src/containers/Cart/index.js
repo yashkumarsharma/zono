@@ -7,7 +7,6 @@ import { Cart } from '../../components'
 
 const Container = props => {
   const { cart, products } = props
-
   return (
     <Cart
       cart={cart}

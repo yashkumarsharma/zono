@@ -1,9 +1,16 @@
 import { Map } from 'immutable'
 import { ActionTypes } from '../constants/index'
-import { createReducer } from '../utilities/helper'
+import { createReducer, getInitialState } from '../utilities/helper'
+
+const storedState = getInitialState('cart')
+let cart = Map({})
+
+if(storedState) {
+  cart = Map(storedState.cart)
+}
 
 export const initialState = Map({
-  cart: Map({}),
+  cart,
 })
 
 export default {

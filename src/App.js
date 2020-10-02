@@ -17,6 +17,8 @@ import {
 
 import reducer from './reducers'
 import sagas from './sagas'
+import { persistState } from './utilities/helper'
+
 import './App.css'
 
 // create our store
@@ -37,8 +39,12 @@ const configureStore = (() => {
   }
 })()
 
-export const store = configureStore.create()
+const store = configureStore.create()
 sagaMiddleware.run(sagas)
+
+store.subscribe(() => {
+  persistState(['cart', 'productCatalog'], store.getState())
+})
 
 function App() {
   return (
