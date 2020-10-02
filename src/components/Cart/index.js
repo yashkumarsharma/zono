@@ -32,7 +32,12 @@ export default (props) => {
     </div>
   )
 
-  if(!products.length) return 'Nothing is present in the cart...'
+  if(!products.length) return (
+    <div className='centerMessage'>
+      Nothing is present in the cart...
+    </div>
+  )
+
   return (
     <>
       {renderProducts()}

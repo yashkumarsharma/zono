@@ -6,3 +6,37 @@
 .productWrapper {
   margin-bottom: 50px;
 }
+
+.inlineBlockDiv {
+  display: inline-block;
+}
+
+.quantity {
+  text-decoration: underline;
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+
+.quantityWrapper {
+  width: 25vw;
+}
+
+.quantityWrapper .button,
+.quantityWrapper .button:focus {
+  border: none;
+  outline: none;
+}
+
+.productName {
+  text-align: left;
+  margin-bottom: 1vh;
+}
+
+.separator {
+  width: 50vw;
+  opacity: 0.5;
+}
+
+.reviewTotal {
+  margin-left: 10vw;
+}

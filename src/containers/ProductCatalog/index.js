@@ -13,13 +13,12 @@ const Container = (props) => {
     if(isLoading) getProductCatalog()
   }, [getProductCatalog, isLoading])
 
-
-  if(isLoading) return 'Products are being loaded...'
   return (
     <ProductCatalog
       productList={productList}
       updateCart={updateCart}
       cart={cart} // Scope of refactoring
+      isLoading={isLoading}
     />
   )
 }

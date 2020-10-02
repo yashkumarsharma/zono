@@ -26,7 +26,7 @@ export default (props) => {
 
     if(!isNameValid) setNameError('Invalid Name')
     if(!isEmailValid) setEmailError('Invalid Email')
-    if(!isMobileValid) setMobileError('Invalid Mobile')
+    if(!isMobileValid) setMobileError('Please enter 10 digits of your mobile number')
 
     if(isNameValid && isEmailValid && isMobileValid) {
       onCheckoutSuccess({ name, email, mobile })
@@ -36,8 +36,8 @@ export default (props) => {
   const renderCheckoutSuccess = () => {
     setTimeout(resetCheckout, 3000)
     return (
-      <div>
-        Checkout successfull. Redirecting to Homepage...
+      <div className='centerMessage'>
+        Checkout successful. Redirecting to Homepage...
       </div>
     )
   }
@@ -53,7 +53,7 @@ export default (props) => {
         <div> Grand Total: {grandTotal} </div>
         <div className='formFields' title="error">
           <span className='label'> Name: </span>
-          <span className='tooltip'>
+          <span>
             <input
               onChange={e => {
                 setName(e.target.value)
@@ -61,12 +61,12 @@ export default (props) => {
               }}
               value={name}
             />
-            {!!nameError && <span className='tooltiptext'>{nameError}</span>}
+            {!!nameError && <span className='errorMessage'>{nameError}</span>}
           </span>
         </div>
         <div className='formFields'>
           <span className='label'> Email: </span>
-          <span className='tooltip'>
+          <span>
             <input
               onChange={e => {
                 setEmail(e.target.value)
@@ -74,12 +74,12 @@ export default (props) => {
               }}
               value={email}
             />
-            {!!emailError && <span className='tooltiptext'>{emailError}</span>}
+            {!!emailError && <span className='errorMessage'>{emailError}</span>}
           </span>
         </div>
         <div className='formFields'>
           <span className='label'> Mobile: </span>
-          <span className='tooltip'>
+          <span>
             <input
               onChange={e => {
                 setMobile(e.target.value.replace(/[^0-9]/g, ''))
@@ -87,7 +87,7 @@ export default (props) => {
               }}
               value={mobile}
             />
-            {!!mobileError && <span className='tooltiptext'>{mobileError}</span>}
+            {!!mobileError && <span className='errorMessage'>{mobileError}</span>}
           </span>
         </div>
 

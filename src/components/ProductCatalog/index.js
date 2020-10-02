@@ -4,7 +4,7 @@ import {
   SingleProduct, // better name?
 } from '../'
 
-export default ({ productList = [], updateCart, cart }) => {
+export default ({ productList = [], updateCart, cart, isLoading }) => {
 
   const renderProducts = () => productList.map(renderSingleProduct)
 
@@ -24,6 +24,16 @@ export default ({ productList = [], updateCart, cart }) => {
     )
   }
 
-  if(!productList.length) return 'No Products found'
+  if(isLoading) return (
+    <div className='centerMessage'>
+      Products are being loaded...
+    </div>
+  )
+
+  if(!productList.length) return (
+    <div className='centerMessage'>
+      No Products found
+    </div>
+  )
   return renderProducts()
 }

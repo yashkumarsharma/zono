@@ -17,27 +17,26 @@ export default (props) => {
   const renderQuantity = () => {
     const isMinusButtonDisabled = quantity === 0
     return (
-      <div>
-        <input disabled value={quantity} />
-        {!isReview && (
-          <>
-            <button onClick={() => updateCart({ id, quantity: quantity + 1})}> + </button>
-            <button onClick={() => updateCart({ id, quantity: quantity - 1})} disabled={isMinusButtonDisabled}> - </button>
-          </>
-        )}
-        {isReview && (
-          <div> {total} </div>
-        )}
+      <div className='inlineBlockDiv quantityWrapper'>
+        {!isReview && <button className='button' onClick={() => updateCart({ id, quantity: quantity - 1})} disabled={isMinusButtonDisabled}> - </button>}
+        <span className='quantity'>{quantity}</span>
+        {!isReview && <button className='button' onClick={() => updateCart({ id, quantity: quantity + 1})}> + </button>}
       </div>
     )
   }
 
   return (
-    <div className='productWrapper'>
-      <div> <img alt={name} className='productIcon' src={icon} /> </div>
-      <div> {name} </div>
-      <div> {price} </div>
-      <div> {renderQuantity()} </div>      
+    <div className={`productWrapper ${isReview ? 'reviewMode' : ''}`}>
+      <div className='inlineBlockDiv'> <img alt={name} className='productIcon' src={icon} /> </div>
+      <div className='inlineBlockDiv'>
+        <div className='productName'> {name} </div>
+        {!isReview && <div> Price: {price} {renderQuantity()} </div>}
+        {isReview && (<div>
+          <span> Qty: {quantity} </span>
+          <span className='reviewTotal'> Total: {total} </span>
+        </div>)}
+      </div>
+      <hr className='separator' />
     </div>
   )
 }
